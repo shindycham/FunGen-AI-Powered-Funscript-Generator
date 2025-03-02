@@ -1,3 +1,4 @@
 @echo off
-powershell -File .\Test-WingetInstall.ps1
+CD /d "%~dp0"
+powershell -ExecutionPolicy Bypass -File ".\installer\Install-ffmpeg.ps1"
 pause

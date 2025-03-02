@@ -150,8 +150,8 @@ Function Install-WinUtilProgramWinget {
     for ($i = 0; $i -lt $count; $i++) {
         $Program = $Programs[$i]
         $result = $false
-        Set-WinUtilProgressBar -label "$Action $($Program)" -percent ($i / $count * 100)
-        $sync.form.Dispatcher.Invoke([action]{ Set-WinUtilTaskbaritem -value ($i / $count)})
+#        Set-WinUtilProgressBar -label "$Action $($Program)" -percent ($i / $count * 100)
+#        $sync.form.Dispatcher.Invoke([action]{ Set-WinUtilTaskbaritem -value ($i / $count)})
 
         $result = switch ($Action) {
             "Install" {Invoke-Install -Program $Program}
@@ -164,6 +164,6 @@ Function Install-WinUtilProgramWinget {
         }
     }
 
-    Set-WinUtilProgressBar -label "$($Action)ation done" -percent 100
+#    Set-WinUtilProgressBar -label "$($Action)ation done" -percent 100
     return $failedPackages
 }
