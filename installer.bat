@@ -2,9 +2,27 @@
 SETLOCAL EnableDelayedExpansion
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-@REM TODO Make sure this is being ran as an administrator
+@REM Make sure this is being ran as an administrator
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+@echo off
+goto check_Permissions
+
+:check_Permissions
+echo Administrative permissions required. Detecting permissions...
+net session >nul 2>&1
+if %errorLevel% == 0 (
+    echo Success: Administrative permissions confirmed.
+) else (
+    echo Failure: Current permissions inadequate.
+    pause >nul
+    exit /B 1
+)
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+@REM Administrator check completed. Continuing...
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Get the directory where the batch file is located
 set "BATCH_DIR=%~dp0logs\"

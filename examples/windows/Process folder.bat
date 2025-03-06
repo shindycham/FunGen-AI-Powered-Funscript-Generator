@@ -14,6 +14,6 @@ REM Activate the conda environment
 call "%CONDA_PATH%" VRFunAIGen
 
 REM Run the CLI command. Your path should look something like this: "C:\my-video-folder"
-python -m script_generator.cli.generate_funscript_folder /path/to/your/folder --num-workers=2 --replace-outdated
+python -m script_generator.cli.generate_funscript_folder "X:\VR\Movies No Script\DarkroomVR\Nikki Hill" --num-workers=3 --replace-outdated
 
 pause
