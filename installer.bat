@@ -16,6 +16,7 @@ if %errorLevel% == 0 (
     echo Success: Administrative permissions confirmed.
 ) else (
     echo Failure: Current permissions inadequate.
+    echo Right-click installer.bat, then Run As Administrator
     pause >nul
     exit /B 1
 )
@@ -71,7 +72,7 @@ call C:\Users\%USERNAME%\miniconda3\Scripts\activate.bat base
 conda info --envs | findstr /C:"VRFunAIGen"
 if %errorlevel% neq 0 (
     echo Environment "VRFunAIGen" not found. Creating it...
-    conda create -n VRFunAIGen python=3.11 -y
+    call conda create -n VRFunAIGen python=3.11 -y
 ) else (
     echo Environment "VRFunAIGen" already exists.
 )
@@ -106,16 +107,19 @@ IF %ERRORLEVEL% == 0 (
     goto models :: Skip installing cuda requirements.
 )
 
+
+
 :: Install CUDA-specific dependencies with logging
 echo Installing CUDA requirements, please wait...
 :: Ensure the working directory contains cuda.requirements.txt
 if exist cuda.requirements.txt (
     echo Installing packages from cuda.requirements.txt...
-    powershell -Command "pip install -r cuda.requirements.txt | Tee-Object -FilePath '%BATCH_DIR%\cuda_requirements_log.txt'"
-    powershell -Command "pip install tensorrt | Tee-Object -FilePath '%BATCH_DIR%\tensorrt_requirements_log.txt'"
+    powershell -Command "conda run -n VRFunAIGen pip install -r cuda.requirements.txt | Tee-Object -FilePath '%BATCH_DIR%\cuda_requirements_log.txt'"
+    powershell -Command "conda run -n VRFunAIGen pip install tensorrt | Tee-Object -FilePath '%BATCH_DIR%\tensorrt_requirements_log.txt'"
 ) else (
     echo cuda.requirements.txt not found in the current directory.
 )
+
 
 :models
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -134,6 +138,7 @@ echo ======================================================
 
 :: Prompt user for model type
 echo Choose the type of models to download:
+echo Currently the choice is irrelevent. It downloads all models no matter what you pick.
 echo 1 - Slower but more powerful models
 echo 2 - Faster but less accurate models
 echo 3 - All models
