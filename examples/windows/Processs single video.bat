@@ -14,6 +14,6 @@ REM Activate the conda environment
 call "%CONDA_PATH%" VRFunAIGen
 
 REM Run the CLI command. Your path should look something like this: "C:\my-movie.mp4"
-python -m script_generator.cli.generate_funscript_single "X:\VR\Movies No Script\DarkroomVR\Nikki Hill\v.0.2.0_FunGen-12s-pov-1.1.0.engine.3080_DarkroomVR - 2022-02-04 - Daddy's Good Girl [WEBDL-3630].mp4"
+python -m script_generator.cli.generate_funscript_single /path/to/your/video.mp4
 
 pause
