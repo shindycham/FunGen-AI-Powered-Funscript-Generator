@@ -46,6 +46,9 @@ cd /d C:\path\to\fungenfolder
 ```bash
 conda create -n VRFunAIGen python=3.11
 conda activate VRFunAIGen
+```
+*Note that if you have a 50 series GPU, you will need to edit the cuda.requirements.txt file and change the end of the first line from 121 to 128. Then continue with the instructions.*
+```bash
 pip install -r core.requirements.txt
 pip install -r cuda.requirements.txt
 pip install tensorrt
